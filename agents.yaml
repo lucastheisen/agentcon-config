@@ -1,0 +1,25 @@
+---
+agents:
+  cursor:
+    image: pastdev.com/agentcon-cursor:latest
+    build:
+      context: '{{relativeDir "cursor"}}'
+    mounts:
+      - source: "{{home}}/.cursor"
+        target: /agent/cursor
+      - source: "{{home}}/.config/cursor"
+        target: /agent/cursor-config
+    tunnel:
+      - cursor.com
+      - "*.cursor.com"
+      - "*.cursor.sh"
+      - "*.cursor-cdn.com"
+      - "*.cursorapi.com"
+      - "*.cursorvm.com"
+      - accounts.spacex.ai
+      - accounts.x.ai
+      - anysphere-binaries.s3.us-east-1.amazonaws.com
+      - agent-stores.s3.us-east-1.amazonaws.com
+      - cloud-agent-artifacts.s3.us-east-1.amazonaws.com
+      - cursor.blob.core.windows.net
+

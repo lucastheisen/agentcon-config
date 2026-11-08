@@ -1,0 +1,31 @@
+---
+bouncers:
+  smoke:
+    default_profile: agent
+    approvals: {notify: false, terminal: false, cli: false}
+    credentials:
+      smoke:
+        token:
+          source: bitwarden
+          email: agent@pastdev.com
+          item: agent-bouncer-smoke-test
+          path: $.notes
+    profiles:
+      agent:
+        unmatched: deny
+        http:
+          - name: vault
+            hosts: [vault.test]
+            credential: smoke
+            filters:
+              - ts/filters/vault-echo.ts
+            rules:
+              - action: allow
+                methods: [GET]
+                path: /
+contexts:
+  test:
+    agent: cursor
+    root: "{{home}}/git"
+    bouncer: smoke
+
